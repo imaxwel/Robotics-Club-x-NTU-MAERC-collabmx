@@ -1,6 +1,10 @@
 import pybullet as p
 import pybullet_data
 import time
+import os
+
+# Get the directory where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())

@@ -4,10 +4,13 @@ import os
 import time
 import math
 
+# Get the directory where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
 p.connect(p.GUI)
 
 p.loadURDF(os.path.join(pybullet_data.getDataPath(), "plane.urdf"), 0, 0, 0)
-robot = p.loadURDF("robot_arm.urdf")
+robot = p.loadURDF(os.path.join(script_dir, "robot_arm.urdf"))
 p.resetBasePositionAndOrientation(robot, [0, 0, 0.05], [0, 0, 0, 0.707])
 
 p.setGravity(0, 0, 0)
