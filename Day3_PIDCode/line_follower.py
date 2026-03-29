@@ -16,18 +16,23 @@ import pybullet as p
 import time
 import math
 import cv2
+import os
+# Get the directory where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 p_id = p.connect(p.GUI) #Loading the simulation
 p.setGravity(0, 0, -10) #Setting the gravity
 
-plane = p.loadURDF("src/plane.urdf") #Loading the plane
+#plane = p.loadURDF("src/plane.urdf") #Loading the plane
+plane = p.loadURDF(os.path.join(script_dir, "src/plane.urdf")) #Loading the plane
 carPos = [0,3,0.1] #This is where the car will spawn, this is constant. 
 
 m = 0   #Declaring the slope of the required line y = mx + c
 c = 0   #Declaring the contsnat of the reuired line  y = mx + c
 angle = math.atan(m)
 
-car = p.loadURDF("src/car/car1.urdf", carPos, p.getQuaternionFromEuler([0,0,angle])) 
+#car = p.loadURDF("src/car/car1.urdf", carPos, p.getQuaternionFromEuler([0,0,angle])) 
+car = p.loadURDF(os.path.join(script_dir, "src/car/car1.urdf"), carPos, p.getQuaternionFromEuler([0,0,angle])) 
 #Loading the car with head parallel to the given line
 
 
@@ -35,7 +40,8 @@ def printLine(m, c):  #This functions draws a line that we need to follow
     angle = math.atan(m)
     z = 0.02
     origin = [0,c,z]
-    line = p.loadURDF("src/line.urdf", origin, p.getQuaternionFromEuler([0,0,angle]))
+    #line = p.loadURDF("src/line.urdf", origin, p.getQuaternionFromEuler([0,0,angle]))
+    line = p.loadURDF(os.path.join(script_dir, "src/line.urdf"), origin, p.getQuaternionFromEuler([0,0,angle]))
 
 printLine(m, c)  #Calling the function to print the line
 
