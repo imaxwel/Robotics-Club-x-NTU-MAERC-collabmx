@@ -1,6 +1,9 @@
 import pybullet as p
 import time
 import pybullet_data
+import os
+# Get the directory where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
 physicsClient = p.connect(p.GUI)#or p.DIRECT for non-graphical version
 p.setAdditionalSearchPath(pybullet_data.getDataPath()) #optionally
 planeId = p.loadURDF("plane.urdf")
@@ -16,7 +19,7 @@ for i in range (10000):
       
        for n in range(y):
             StartPos=[n,0,5]
-            n= p.loadURDF("sphere.urdf",StartPos, StartOrientation)
+            n= p.loadURDF(os.path.join(script_dir, "sphere.urdf"),StartPos, StartOrientation)
        for m in range(250):
         p.stepSimulation()
         time.sleep(1/240)
