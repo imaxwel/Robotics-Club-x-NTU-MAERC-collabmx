@@ -27,14 +27,19 @@ import pybullet as p
 import time
 import math
 import cv2
+import os
+# Get the directory where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 p_id = p.connect(p.GUI)               #Loading the simulation
 p.setGravity(0, 0, -10)               #Setting the gravity
 
-plane = p.loadURDF("src/plane.urdf")     #Loading the plane
+# plane = p.loadURDF("src/plane.urdf")     #Loading the plane
+plane = p.loadURDF(os.path.join(script_dir, "src/plane.urdf"))     #Loading the plane
 dronePos = [0,0,0.2]                     #Initial Position of the drone
-drone = p.loadURDF("src/quadrotor.urdf", dronePos)      #Loading the drone
+#drone = p.loadURDF("src/quadrotor.urdf", dronePos)      #Loading the drone
+drone = p.loadURDF(os.path.join(script_dir, "src/quadrotor.urdf"), dronePos)      #Loading the drone
 
 
 def callback():            #Dummy function for the track-bars
