@@ -31,7 +31,9 @@ def Forward_Kinematics(angle_1, angle_2):
     print(f"y : {y:.2f}, z : {z:.2f}")
 
 
-angle_1, angle_2 = [0, 0]
+# angle_1, angle_2 = [0, 0]
+# angle_1, angle_2 = [1, 0]
+angle_1, angle_2 = [1, 1]
 Forward_Kinematics(angle_1, angle_2)
 
 while True:
