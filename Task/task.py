@@ -13,6 +13,9 @@ import pybullet as p
 import time
 import math
 import cv2
+import os
+# Get the directory where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 def printTrack():  # This functions draws the track that we need to follow.
@@ -23,14 +26,14 @@ def printTrack():  # This functions draws the track that we need to follow.
         z = 0.02
         x = r * math.cos(theta)
         y = r * math.sin(theta)
-        line = p.loadURDF("src/line.urdf", [x, y, z], p.getQuaternionFromEuler([0, 0, theta + math.pi / 2]))
+        line = p.loadURDF(os.path.join(script_dir, "src/line.urdf"), [x, y, z], p.getQuaternionFromEuler([0, 0, theta + math.pi / 2]))
 
 
 p_id = p.connect(p.GUI)
 p.setGravity(0, 0, -10)
-plane = p.loadURDF("src/plane.urdf")
+plane = p.loadURDF(os.path.join(script_dir, "src/plane.urdf"))
 carPos = [0, 3, 0.1]
-car = p.loadURDF("src/car/car1.urdf", carPos, p.getQuaternionFromEuler([0, 0, 0]))
+car = p.loadURDF(os.path.join(script_dir, "src/car/car1.urdf"), carPos, p.getQuaternionFromEuler([0, 0, 0]))
 printTrack()
 
 num = p.getNumJoints(car)  # Getting the total number of joints in the car
@@ -99,8 +102,8 @@ while True:  # This while loop will run until ESCAPE key is pressed, then it wil
     if keycode.get(p.B3G_RETURN) == 1:  # As soon as any key is pressed and it's ENTER key, simulation starts
         p.resetSimulation()
         p.setGravity(0, 0, -10)
-        plane = p.loadURDF("src/plane.urdf")
-        car = p.loadURDF("src/car/car1.urdf", carPos, p.getQuaternionFromEuler([0, 0, 0]))  # Plane and car loaded again
+        plane = p.loadURDF(os.path.join(script_dir, "src/plane.urdf"))
+        car = p.loadURDF(os.path.join(script_dir, "src/car/car1.urdf"), carPos, p.getQuaternionFromEuler([0, 0, 0]))  # Plane and car loaded again
         p.setJointMotorControlArray(car, [fl, bl, fr, br], p.VELOCITY_CONTROL, forces=[0, 0, 0, 0])
         printTrack()
 
