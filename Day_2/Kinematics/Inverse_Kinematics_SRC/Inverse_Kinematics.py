@@ -36,7 +36,8 @@ r = 0.5
 y_old = 1.5
 z_old = 0.5
 
-use_custom = False    # Switch to True, to use custom-built Inverse_Kinematics function.
+# use_custom = False    # Switch to True, to use custom-built Inverse_Kinematics function.
+use_custom = True    # Switch to True, to use custom-built Inverse_Kinematics function.
 
 while True:
 
