@@ -28,13 +28,18 @@ import time
 import math
 import cv2
 import matplotlib.pyplot as plt
+import os
+# Get the directory where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 p_id = p.connect(p.GUI)               #Loading the simulation
 p.setGravity(0, 0, -10)               #Setting the gravity
 
-plane = p.loadURDF("src/plane.urdf")     #Loading the plane
+#plane = p.loadURDF("src/plane.urdf")     #Loading the plane
+plane = p.loadURDF(os.path.join(script_dir, "src/plane.urdf"))     #Loading the plane
 dronePos = [0,0,0.2]                     #Initial Position of the drone
-drone = p.loadURDF("src/quadrotor.urdf", dronePos)      #Loading the drone
+# drone = p.loadURDF("src/quadrotor.urdf", dronePos)      #Loading the drone
+drone = p.loadURDF(os.path.join(script_dir, "src/quadrotor.urdf"), dronePos)      #Loading the drone
 
 
 def callback():            #Dummy function for the track-bars
@@ -72,9 +77,9 @@ while(True):
         p.resetSimulation()                #Reseting the simulation
         p.setGravity(0, 0, -10)     
 
-        plane = p.loadURDF("src/plane.urdf")        #Loading the plane and drone again
+        plane = p.loadURDF("Day_3/Robot Control/src/plane.urdf")        #Loading the plane and drone again
         dronePos = [0,0,0.1]
-        drone = p.loadURDF("src/quadrotor.urdf", dronePos)
+        drone = p.loadURDF("Day_3/Robot Control/src/quadrotor.urdf", dronePos)
         state = p.getBasePositionAndOrientation(drone)[0][2]    #Getting the state to calculate error. In this case, it is the height of the drone
         p.createConstraint(drone, -1, -1, -1, p.JOINT_PRISMATIC, [0,0,1], [0,0,0], [0,0,0])  #Contraining the drone to move along Z-axis only
         p.stepSimulation()                #Stepping the simulation by a step
@@ -120,9 +125,9 @@ while(True):
                 p.resetSimulation()
                 p.setGravity(0, 0, -10)
 
-                plane = p.loadURDF("src/plane.urdf")
+                plane = p.loadURDF("Day_3/Robot Control/src/plane.urdf")
                 dronePos = [0,0,0.2]
-                drone = p.loadURDF("src/quadrotor.urdf", dronePos)
+                drone = p.loadURDF("Day_3/Robot Control/src/quadrotor.urdf", dronePos)
                 p.stepSimulation()
                 #graph of single simulation
                 fig, (gph) = plt.subplots(1, 1, constrained_layout=True, sharey=True)
