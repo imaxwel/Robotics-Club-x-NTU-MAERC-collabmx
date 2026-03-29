@@ -170,8 +170,8 @@ while(True):
         p.resetSimulation() #Simulation is reseted
         p.setGravity(0, 0, -10)
 
-        plane = p.loadURDF("src/plane.urdf")
-        car = p.loadURDF("src/car/car1.urdf", carPos, p.getQuaternionFromEuler([0,0,angle]))   #Plane and car loaded again
+        plane = p.loadURDF(os.path.join(script_dir, "src/plane.urdf"))
+        car = p.loadURDF(os.path.join(script_dir, "src/car/car1.urdf"), carPos, p.getQuaternionFromEuler([0,0,angle]))   #Plane and car loaded again
 
         p.setJointMotorControlArray(car, [fl, bl, fr, br], p.VELOCITY_CONTROL, forces = [0,0,0,0])   
         #This is done to enable torque control in wheels of the car
