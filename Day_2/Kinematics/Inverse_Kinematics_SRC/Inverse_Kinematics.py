@@ -3,12 +3,15 @@ import pybullet_data
 import os
 import time
 import math
+# Get the directory where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 file_name = "2R_Robotic_Arm.urdf"
 p.connect(p.GUI)
 p.loadURDF(os.path.join(pybullet_data.getDataPath(), "plane.urdf"), 0, 0, 0)
 orn = p.getQuaternionFromEuler([0, 0, 0])
-robot = p.loadURDF(file_name, [0, 0, 0], orn)
+#robot = p.loadURDF(file_name, [0, 0, 0], orn)
+robot = p.loadURDF(os.path.join(script_dir, file_name), [0, 0, 0], orn)
 p.createConstraint(parentBodyUniqueId=robot, parentLinkIndex=0, childBodyUniqueId=-1,       # Fixing the robot in place.
                    childLinkIndex=-1, jointType=p.JOINT_POINT2POINT, jointAxis=[1, 0, 0],
                    parentFramePosition=[0, 0, 0], childFramePosition=[0, 0, 0])
